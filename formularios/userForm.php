@@ -9,7 +9,7 @@ $userForm=array(
         'label'=>'Nombre',
         'type'=>'text',
         'filters'=>array('striptags','striptrim'),
-        'validation'=>array('required',
+        'validation'=>array('required'=>TRUE,
                             'maxsize'=>20,
                             'minsize'=>3,
                             'error_message'=>'Error aqui'
@@ -20,7 +20,7 @@ $userForm=array(
         'label'=>'Email',
         'type'=>'email',
         'filters'=>array('striptags','striptrim'),
-        'validation'=>array('required',
+        'validation'=>array('required'=>TRUE,
                             'email',
                             'maxsize'=>20,
                             'minsize'=>3
@@ -30,7 +30,7 @@ $userForm=array(
         'label'=>'Password',
         'type'=>'password',
         'filters'=>array('striptags','striptrim'),
-        'validation'=>array('required',
+        'validation'=>array('required'=>TRUE,
                             'maxsize'=>12,
                             'minsize'=>3
         )
@@ -49,7 +49,7 @@ $userForm=array(
         'label'=>'Sexo',
         'type'=>'radio',
         'options'=>array('M'=>'m','H'=>'h','O'=>'o'),
-        'validation'=>array('required')
+        'validation'=>array('required'=>TRUE)
     ),
     'city'=>array(
         'label'=>'Ciudad',
@@ -72,7 +72,7 @@ $userForm=array(
                         'No'=>'no',
                         'Talvez'=>'talvez'),
         'value'=>'si',
-        'validation'=>array('required')
+        'validation'=>array('required'=>TRUE)
     ),
     'submit'=>array(
         'label'=>null,
