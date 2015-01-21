@@ -13,3 +13,9 @@ $serie = fibonacci($max);
 
 echo dibujaArray($tabla);
 echo dibujaArray($serie);
+
+
+levenshtein($str1, $str2);
+soundex($str);
+
+

@@ -1,0 +1,84 @@
+<?php
+$userForm=array(
+    'id'=>array(
+        'label'=>null,
+        'type'=>'hidden',
+        'value'=>1,                
+    ),
+    'name'=>array(
+        'label'=>'Nombre',
+        'type'=>'text',
+        'filters'=>array('striptags','striptrim'),
+        'validation'=>array('required',
+                            'maxsize'=>20,
+                            'minsize'=>3,
+                            'error_message'=>'Error aqui'
+        ),
+                
+    ),
+    'email'=>array(
+        'label'=>'Email',
+        'type'=>'email',
+        'filters'=>array('striptags','striptrim'),
+        'validation'=>array('required',
+                            'email',
+                            'maxsize'=>20,
+                            'minsize'=>3
+                            )
+    ),
+    'password'=>array(
+        'label'=>'Password',
+        'type'=>'password',
+        'filters'=>array('striptags','striptrim'),
+        'validation'=>array('required',
+            'maxsize'=>12,
+            'minsize'=>3
+        )
+    ),
+    'description'=>array(
+        'label'=>'Descripcion',
+        'type'=>'textarea',
+        'filters'=>array('striptags','striptrim'),        
+    ),
+    'photo'=>array(
+        'label'=>'Foto',
+        'type'=>'file',
+        'validation'=>array('size'=>100000)
+    ),
+    'gender'=>array(
+        'label'=>'Sexo',
+        'type'=>'radio',
+        'options'=>array('M'=>'m','H'=>'h','O'=>'o'),
+        'validation'=>array('required')
+    ),
+    'city'=>array(
+        'label'=>'Ciudad',
+        'type'=>'select',
+        'options'=>array('Valencia'=>'VLC',
+                         'Barcelona'=>'BCN',                       
+                         'Madrid'=>'MAD'),
+    ),
+    'hobbies'=>array(
+        'label'=>'Aficiones',
+        'type'=>'selectmultiple',
+        'options'=>array('Nadar'=>'nadar',
+                        'Leer'=>'leer',
+                        'Correr'=>'correr')
+        
+    ),
+    'privacy'=>array(
+        'label'=>'Politica',
+        'type'=>'text',
+        'options'=>array('Si'=>'si',
+            'No'=>'no',
+            'Talvez'=>'talvez'),
+        'value'=>'si',
+        'validation'=>array('required')
+    ),
+    'submit'=>array(
+        'label'=>null,
+        'type'=>'text',
+        'value'=>'Enviar'
+    ),
+    
+)

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Return fibonacci serie into array
+ * 
+ * @param integer $max
+ * @return array
+ */
 function fibonacci($max) 
 {
     $fibonacci=array();
