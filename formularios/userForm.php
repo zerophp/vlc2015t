@@ -76,7 +76,7 @@ $userForm=array(
     ),
     'submit'=>array(
         'label'=>null,
-        'type'=>'text',
+        'type'=>'submit',
         'value'=>'Enviar'
     ),    
 );
