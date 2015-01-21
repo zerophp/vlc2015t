@@ -31,8 +31,8 @@ $userForm=array(
         'type'=>'password',
         'filters'=>array('striptags','striptrim'),
         'validation'=>array('required',
-            'maxsize'=>12,
-            'minsize'=>3
+                            'maxsize'=>12,
+                            'minsize'=>3
         )
     ),
     'description'=>array(
@@ -63,15 +63,14 @@ $userForm=array(
         'type'=>'selectmultiple',
         'options'=>array('Nadar'=>'nadar',
                         'Leer'=>'leer',
-                        'Correr'=>'correr')
-        
+                        'Correr'=>'correr')        
     ),
     'privacy'=>array(
         'label'=>'Politica',
         'type'=>'text',
         'options'=>array('Si'=>'si',
-            'No'=>'no',
-            'Talvez'=>'talvez'),
+                        'No'=>'no',
+                        'Talvez'=>'talvez'),
         'value'=>'si',
         'validation'=>array('required')
     ),
@@ -79,6 +78,5 @@ $userForm=array(
         'label'=>null,
         'type'=>'text',
         'value'=>'Enviar'
-    ),
-    
-)
+    ),    
+);
