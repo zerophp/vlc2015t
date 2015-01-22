@@ -4,7 +4,7 @@ Formulario de registro
 <ul>
     <li>
         <label>Id</label>
-        <input type="hidden" name="id" />
+        <input type="hidden" name="id" value="<?=$usuario[0];?>"/>
     </li>
     <li>
         <label>Nombre</label>

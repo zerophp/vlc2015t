@@ -1,5 +1,13 @@
 <?phP
 
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+
+// echo "<pre>";
+// print_r($_FILES);
+// echo "</pre>";
+
 if(isset($_GET['action']))
     $action = $_GET['action'];
 else
@@ -26,6 +34,7 @@ switch($action)
                     if(is_array($value))
                         $filterdata[$key]=implode(',',$value);
                 }
+                $filterdata[]=$_FILES['photo']['name'];
                 file_put_contents('usuarios.txt', implode("|",$filterdata)."\n", FILE_APPEND);
             }
             header('Location: /usuarios.php');
@@ -41,15 +50,30 @@ switch($action)
         echo "esto es update";
         if($_POST)
         {
+            include ('filterForm.php');
             // Filtrar el formulario
+            $filterdata = filterForm($userForm, $_POST);
             // Validar el formulario
             // convertir en un string separado por pipes y comas los multiples
+            foreach($filterdata as $key => $value)
+            {
+                if (is_array($value))
+                    $filterdata[$key]=implode(",",$value);                   
+            }
+            $filterdata[]=$_FILES['photo']['name'];
+            $filterdata = implode("|", $filterdata);
             // Leer el fichero usuarios.txt en un string
+            $usuarios = file_get_contents('usuarios.txt');
             // Separar el fichero por saltos de linea en un array
+            $usuarios = explode("\n", $usuarios);
             // Sobreescribir la linea con los datos del usuario
+            $usuarios[$filterdata['id']]=$filterdata;            
             // juntar por saltos de linea en un string
+            $usuarios = implode("\n", $usuarios);
             // Sobreescribir el archivo de texto
+            file_put_contents('usuarios.txt', $usuarios);
             // Saltar a select
+            header('Location: /usuarios.php');
         }
         else 
         {
@@ -118,16 +142,38 @@ switch($action)
         echo "esto es delete";
         if($_POST)
         {
+            // Tomar el id del usuario
+            $id=$_POST['id'];            
             // Leer el fichero usuarios.txt en un string
+            $usuarios = file_get_contents('usuarios.txt');
             // Separar el fichero por saltos de linea en un array
+            $usuarios = explode("\n", $usuarios);
+            
             // Eliminar el usuario id
-            // juntar por saltos de linea en un string
+            unset($usuarios[$id]);
+            // juntar por saltos de linea en un string            
             // Sobreescribir el archivo de texto
+            unlink('usuarios.txt');
+            foreach ($usuarios as $key => $value)
+            {   
+                if(!empty($value)){
+                    if(count($usuarios) != $key)
+                    {
+                        $value = $value."\n";
+                    }
+                    file_put_contents('usuarios.txt', $value, FILE_APPEND);
+                }
+            
+            }
             // Saltar a select
+            header('Location: /usuarios.php');           
         }
         else 
         {
-            // Mostra formulario de confirmacion
+            $html="<form action=\"usuarios.php?action=delete\" method=\"POST\" ><input type=\"hidden\" name=\"id\" value=\"".$_GET["id"]."\" /><input type=\"submit\" name=\"submit\"/ value=\"si\"></form>";
+            $html.="<form action=\"usuarios.php?action=insert\" method=\"GET\" ><input type=\"submit\" name=\"submit\"/ value=\"no\"></form>";
+            echo $html;
+        
         }
         
     break;
