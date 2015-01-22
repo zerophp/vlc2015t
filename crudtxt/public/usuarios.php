@@ -38,6 +38,42 @@ switch($action)
     break;
     
     case 'update':
+        echo "esto es update";
+        if($_POST)
+        {
+            // Filtrar el formulario
+            // Validar el formulario
+            // convertir en un string separado por pipes y comas los multiples
+            // Leer el fichero usuarios.txt en un string
+            // Separar el fichero por saltos de linea en un array
+            // Sobreescribir la linea con los datos del usuario
+            // juntar por saltos de linea en un string
+            // Sobreescribir el archivo de texto
+            // Saltar a select
+        }
+        else 
+        {
+            
+            // Tomar el id del usuario
+            $id=$_GET['id'];
+            // Leer un un string el archivo usuarios.txt
+            $usuarios = file_get_contents('usuarios.txt');            
+            // dividir el string en un array
+            $usuarios = explode("\n", $usuarios);
+            // tomar el usuario id
+            $usuario = $usuarios[$id];
+            // dividir el usuario por pipes
+            $usuario = explode ("|", $usuario);
+            $usuario[7]=explode(",",$usuario[7]);
+            $usuario[8]=explode(",",$usuario[8]);
+            $usuario[0]=$id;
+            echo "<pre>";
+            print_r($usuario);
+            echo "</pre>";
+            
+            // Mostrar el formulario
+            include('update.php');
+        }
     break;
     default:
     case 'select':
@@ -79,6 +115,21 @@ switch($action)
     break;
     
     case 'delete':
+        echo "esto es delete";
+        if($_POST)
+        {
+            // Leer el fichero usuarios.txt en un string
+            // Separar el fichero por saltos de linea en un array
+            // Eliminar el usuario id
+            // juntar por saltos de linea en un string
+            // Sobreescribir el archivo de texto
+            // Saltar a select
+        }
+        else 
+        {
+            // Mostra formulario de confirmacion
+        }
+        
     break;
 }
 
