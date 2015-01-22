@@ -26,9 +26,45 @@ function validationForm($form, $filterdata)
                                 $validation[$key]=$value['validation']['error_message'];
                             else
                                 $validation[$key]='ERROR';
-                        }
-                            
-                            
+                        }  
+                    break;
+                    case 'maxsize':
+                        if ($value['validation']['maxsize']===20)
+                            if(strlen($filterdata[$key]) > 20)
+                            {
+                                if(isset($value['validation']['error_message']))
+                                    $validation[$key]=$value['validation']['error_message'];
+                                else
+                                    $validation[$key]='ERROR';
+                            }
+                        if ($value['validation']['maxsize']===12)
+                            if(strlen($filterdata[$key]) > 12)
+                            {
+                                if(isset($value['validation']['error_message']))
+                                    $validation[$key]=$value['validation']['error_message'];
+                                else
+                                    $validation[$key]='ERROR';
+                            }
+                    break;
+                    case 'minsize':
+                        if ($value['validation']['minsize']===3)
+                            if(strlen($filterdata[$key]) < 3)
+                            {
+                                if(isset($value['validation']['error_message']))
+                                    $validation[$key]=$value['validation']['error_message'];
+                                else
+                                    $validation[$key]='ERROR';
+                            }
+                    break;
+                    case 'email':
+                        if (isset($value['validation'][0]))
+                            if(!filter_var($filterdata[$key], FILTER_VALIDATE_EMAIL))
+                            {
+                                if(isset($value['validation']['error_message']))
+                                    $validation[$key]=$value['validation']['error_message'];
+                                else
+                                    $validation[$key]='ERROR';
+                            }
                     break;
                 }
             }
@@ -37,6 +73,3 @@ function validationForm($form, $filterdata)
         return TRUE;
     return $validation;
 }
-
-
-    

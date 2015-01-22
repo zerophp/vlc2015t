@@ -32,7 +32,7 @@ if($validationdata)
         if(is_array($value))
             $filterdata[$key]=implode(',',$value);        
     }
-    file_put_contents('usuarios.txt', implode("|",$filterdata));    
+    file_put_contents('usuarios.txt', implode("|",$filterdata)."\n", FILE_APPEND);    
 }
 
 
