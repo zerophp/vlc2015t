@@ -1,0 +1,16 @@
+<a href="usuarios.php?action=insert">Insert</a>
+<table border=1>
+<?php foreach ($usuarios as $key => $usuario):?>
+    <tr>
+        <?php 
+        $usuario = explode("|", $usuario); //Separar por pipes
+        foreach($usuario as $key2 => $data):?>        
+            <td><?=$data;?></td>
+        <?php endforeach;?>
+        <td>
+            <a href="usuarios.php?action=update&id=<?=$key;?>">Update</a> | 
+            <a href="usuarios.php?action=delete&id=<?=$key;?>">Delete</a>
+        </td>     
+    </tr>
+<?php endforeach;?>
+</table>
