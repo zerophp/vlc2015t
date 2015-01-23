@@ -8,12 +8,15 @@
 // print_r($_FILES);
 // echo "</pre>";
 
+
+
 require_once ('../modules/application/src/application/forms/userForm.php');
 require_once ('../modules/core/src/core/forms/filterForm.php');
+require_once ('../modules/core/src/core/forms/validationForm.php');
 require_once ('../modules/application/src/application/models/getUsers.php');
 require_once ('../modules/application/src/application/models/deleteUsers.php');
 
-require_once ('../modules/core/src/core/model/getConfig.php');
+require_once ('../modules/core/src/core/models/getConfig.php');
 
 $config = getConfig();
 $filename= $config['filename'];
@@ -29,8 +32,8 @@ switch($action)
         if($_POST)
         {            
             $filterdata = filterForm($userForm, $_POST);
-            // $validationdata = validationForm($userForm, $filterdata);
-            if(TRUE)    // VALIDACION
+            $validationdata = validationForm($userForm, $filterdata);
+            if($validationdata===TRUE)
             {
                 insertUser($filterdata, $filename);
             }

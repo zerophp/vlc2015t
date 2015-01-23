@@ -1,4 +1,4 @@
 <?php
 $config = array(
-    'filename'=>'../data/usuarios.txt',    
-);
+    'filename'=>'../data/usuarios.txt',
+); 
