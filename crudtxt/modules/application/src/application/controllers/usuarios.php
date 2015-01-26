@@ -21,12 +21,8 @@ require_once ('../modules/core/src/core/models/getConfig.php');
 $config = getConfig();
 $filename= $config['filename'];
 
-if(isset($_GET['action']))
-    $action = $_GET['action'];
-else
-    $action = 'select';
 
-switch($action)
+switch($request['action'])
 {
     case 'insert':        
         if($_POST)
