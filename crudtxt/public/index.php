@@ -1,11 +1,14 @@
 <?php
 
 
-echo $_SERVER['REQUEST_URI'];
+require_once ('../modules/core/src/core/models/parseUrl.php');
 
 $request = parseURL();
-$request=array('controller'=>,
-               'action'=>,
+
+// /usuarios/index/param1/val1/param2/val2
+
+$request=array('controller'=>'usuarios',
+               'action'=>'index',
                'params'=>array('param1'=>'val1',
                                'param2'=>'val2')
 );
@@ -23,3 +26,18 @@ switch($controller)
         include_once('../modules/application/src/application/controllers/usuarios.php');
     break;    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
