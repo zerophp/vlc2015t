@@ -2,7 +2,7 @@
 
 function parseUrl()
 {
-    $actions = array('usuarios'=>array('select','insert','delete', 'update'),
+    $actions = array('users'=>array('select','insert','delete', 'update'),
                      
     );
 
@@ -44,6 +44,11 @@ function parseUrl()
         // Ok
         // Return request
         $controller = $request[1];
+        if(!isset($request[2]))
+            return array('controller'=>$controller,
+                         'action'=> 'index'
+            );
+            
         if(in_array($request[2], $actions[$request[1]]) && $request[2]!='')
         {
             $action = $request[2]; 

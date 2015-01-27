@@ -1,6 +1,6 @@
 <?php
 
-function deleteUsers($filename, $id)
+function deleteUser($filename, $id)
 {
     $usuarios = getUsers($filename);
     // Eliminar el usuario id
