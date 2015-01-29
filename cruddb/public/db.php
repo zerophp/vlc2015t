@@ -1,5 +1,9 @@
 <?php
 
+// FRONTCONTNROLER
+
+
+
 $db = array('host'=>'localhost',
       'user'=>'php',
       'password'=>'1234',

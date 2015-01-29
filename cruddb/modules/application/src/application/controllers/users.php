@@ -55,8 +55,33 @@ switch($request['action'])
     break;
     default:
     case 'select':
-        $usuarios = getUsers($filename);
-        $content = renderView($request, $config, array('usuarios'=>$usuarios));        
+//         $usuarios = getUsers($filename);
+//         echo "<pre>";
+//         print_r($usuarios);
+//         echo "</pre>";
+        
+        $link = mysqli_connect($config['db']['host'],
+                               $config['db']['user'],
+                               $config['db']['password']);
+        
+        mysqli_select_db($link, $config['db']['database']);
+        
+        $query = "SELECT iduser, name, email,
+                         password, description,
+                         photo  FROM users";
+        //echo $query;
+        
+        $result = mysqli_query($link, $query);
+        
+        while($row = mysqli_fetch_assoc($result))
+            $usuarios2[]=$row;
+        
+        foreach ($usuarios2 as $values)
+            $usuarios[] = implode("|", $values);
+        
+        
+        $content = renderView($request, $config, 
+                              array('usuarios'=>$usuarios));        
     break;
     
     case 'delete':
