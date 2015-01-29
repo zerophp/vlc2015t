@@ -1,12 +1,5 @@
 <?php
 
-$name = "agustin".date('Y H i \n j s');
-
-echo hash('sha256', $name);
-
-die;
-
-
 require_once ('../modules/core/src/core/models/parseUrl.php');
 
 $request = parseURL();

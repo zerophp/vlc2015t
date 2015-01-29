@@ -1,0 +1,6 @@
+Seguro que quieres borrar el usuario?
+<form action="usuarios.php?action=delete" method="POST" >
+    <input type="hidden" name="id" value="<?=$request['params']['id'];?>" />
+    <input type="submit" name="submit" value="si">
+    <input type="submit" name="submit" value="no">
+</form>
