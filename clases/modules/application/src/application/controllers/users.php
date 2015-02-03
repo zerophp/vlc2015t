@@ -14,14 +14,15 @@ require_once ('../modules/application/src/application/models/getUser.php');
 require_once ('../modules/application/src/application/models/deleteUser.php');
 require_once ('../modules/application/src/application/models/deleteUserDB.php');
 
-require_once ('../modules/core/src/core/models/getConfig.php');
+
 require_once ('../modules/core/src/core/models/renderView.php');
 
-$config = getConfig();
+
 $filename= $config['filename'];
 
 if ($request['action']=='index')
     $request['action']='select';
+
 
 switch($request['action'])
 {
