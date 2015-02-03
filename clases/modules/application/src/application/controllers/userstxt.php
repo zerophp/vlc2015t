@@ -4,15 +4,10 @@ require_once ('../modules/application/src/application/forms/userForm.php');
 require_once ('../modules/core/src/core/forms/filterForm.php');
 require_once ('../modules/core/src/core/forms/validationForm.php');
 require_once ('../modules/application/src/application/models/insertUser.php');
-require_once ('../modules/application/src/application/models/insertUserDB.php');
 require_once ('../modules/application/src/application/models/updateUser.php');
-require_once ('../modules/application/src/application/models/updateUserDB.php');
 require_once ('../modules/application/src/application/models/getUsers.php');
-require_once ('../modules/application/src/application/models/getUsersDB.php');
-require_once ('../modules/application/src/application/models/getUserDB.php');
 require_once ('../modules/application/src/application/models/getUser.php');
 require_once ('../modules/application/src/application/models/deleteUser.php');
-require_once ('../modules/application/src/application/models/deleteUserDB.php');
 
 require_once ('../modules/core/src/core/models/getConfig.php');
 require_once ('../modules/core/src/core/models/renderView.php');
@@ -20,8 +15,6 @@ require_once ('../modules/core/src/core/models/renderView.php');
 $config = getConfig();
 $filename= $config['filename'];
 
-if ($request['action']=='index')
-    $request['action']='select';
 
 switch($request['action'])
 {
@@ -32,8 +25,7 @@ switch($request['action'])
             $validationdata = validationForm($userForm, $filterdata);
             if($validationdata===TRUE)
             {
-                //insertUser($filterdata, $filename);
-                insertUserDB($filterdata, 'users', $config);
+                insertUser($filterdata, $filename);
             }
             header('Location: /users');            
         }        
@@ -48,23 +40,23 @@ switch($request['action'])
         {
             $filterdata = filterForm($userForm, $_POST);
             // Validar el formulario
-            //updateUser($filterdata, $filterdata['id'], $filename);
-            updateUserDB($filterdata, 'users', $config, $filterdata['iduser']);
+            updateUser($filterdata, $filterdata['id'], $filename);
             header('Location: /users');
         }
         else 
         {
-            // $usuario = getUser($request['params']['id'], $filename);
-            $usuario = getUserDB('users', $request['params']['id'], $config);
-            $content = renderView($request, $config, array('usuario'=>$usuario[0]));
+            $usuario = getUser($request['params']['id'], $filename);
+//             ob_start();
+//                 include('../modules/application/src/application/views/users/update.php');
+//                 $content = ob_get_contents();
+//             ob_end_clean();
+            $content = renderView($request, $config, array('usuario'=>$usuario));
         }
     break;
     default:
     case 'select':
-        // $usuarios = getUsers($filename);
-        $usuarios=getUsersDB('users', $config);
-        $content = renderView($request, $config, 
-                              array('usuarios'=>$usuarios));        
+        $usuarios = getUsers($filename);
+        $content = renderView($request, $config, array('usuarios'=>$usuarios));        
     break;
     
     case 'delete':
@@ -73,15 +65,17 @@ switch($request['action'])
         {
             if($_POST['submit']=='si')
             {
-                //deleteUser($filename,$_POST['id']);
-                deleteUserDB('users', $_POST['iduser'], $config);
+                deleteUser($filename,$_POST['id']);
             }
             // Saltar a select
             header('Location: /users');           
         }
         else 
         {
-            $content =renderView($request, $config);
+            ob_start();
+                include('../modules/application/src/application/views/users/delete.phtml');
+                $content = ob_get_contents();
+            ob_end_clean();
         }
         
     break;
