@@ -26,12 +26,12 @@ class FrontController
     
     public function getconfig()
     {
-        require_once('../configs/local.php');
+        require_once('../configs/autoload/local.php');
         
        
         $config_local = $config;
          
-        include_once('../configs/global.php');
+        include_once('../configs/autoload/global.php');
         $config_global = $config;
     
         $config = array_merge($config_global, $config_local);

@@ -2,9 +2,11 @@
 
 require_once ('../autoload.php');
 
-// $fc = new core\models\FrontController('alsñk.php');
-// $fc->dispatch();
 
+if(getenv('APPLICATION_ENV')!='development')
+    $config = 'config/application.php';
+else
+    $config = 'config/application.development.php';
 
-$fc = core\models\FrontController::getInstance('asdasd');
+$fc = core\models\FrontController::getInstance();
 $fc->dispatch();
