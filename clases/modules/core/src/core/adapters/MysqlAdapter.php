@@ -25,22 +25,22 @@ class MysqlAdapter implements \acl\adapters\AdapterInterface
     
     private function close()
     {
-    mysqli_close($this->link);    
+        mysqli_close($this->link);    
     }
     
     private function selectDb()
     {
-    mysqli_select_db($this->link, $this->config['database']);    
+        mysqli_select_db($this->link, $this->config['database']);    
     }
     
     public function updateQueryDb($query)
     {
-    return mysqli_query($this->link, $query);    
+        return mysqli_query($this->link, $query);    
     }
     
     public function selectQueryDb($query)
     {
-    $array = array();        
+        $array = array();        
         $result  = mysqli_query($this->link, $query);
         while ($row = mysqli_fetch_assoc($result))
         {
@@ -51,7 +51,7 @@ class MysqlAdapter implements \acl\adapters\AdapterInterface
     
     public function __destruct()
     {
-    $this->close();    
+        $this->close();    
     }
       
 }
