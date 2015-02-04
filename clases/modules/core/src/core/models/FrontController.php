@@ -8,33 +8,46 @@ class FrontController
     public $response;    
     private $layout;
     static $instance;
+    private $applicationConfig;
     
-    public static function getInstance()
+    public static function getInstance($applicationConfig)
     {
         if(!self::$instance)
-            self::$instance = new FrontController();
+            self::$instance = new FrontController($applicationConfig);
         
         return self::$instance; 
             
     } 
     
-    private function __construct()
+    private function __construct($applicationConfig)
     {
+        $this->applicationConfig = require_once('../'.$applicationConfig);
         $this->config = $this->getConfig();
         $this->request = $this->parseUrl();       
     }
     
     public function getconfig()
-    {
-        require_once('../configs/autoload/local.php');
+    {   
+        $config2=array();        
         
-       
-        $config_local = $config;
-         
-        include_once('../configs/autoload/global.php');
-        $config_global = $config;
-    
-        $config = array_merge($config_global, $config_local);
+        foreach ($this->applicationConfig['modules'] as $modules)
+        {
+            $config_local=array();
+            $config_global=array();
+            if(file_exists('../configs/autoload/'.$modules.'.local.php'))
+            {
+                require_once('../configs/autoload/'.$modules.'.local.php');
+                $config_local = $config;
+            }
+            
+            if(file_exists('../configs/autoload/'.$modules.'.global.php'))
+            {
+                include_once('../configs/autoload/'.$modules.'.global.php');
+                $config_global = $config;
+            }
+            
+            $config2 = array_merge($config2, $config_global, $config_local);
+        }
         
         return $config;
     }

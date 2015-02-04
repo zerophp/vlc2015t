@@ -1,4 +1,6 @@
 <?phP
+namespace application\controllers;
+
 
 require_once ('../modules/application/src/application/forms/userForm.php');
 require_once ('../modules/core/src/core/forms/filterForm.php');
@@ -18,17 +20,30 @@ require_once ('../modules/application/src/application/models/deleteUserDB.php');
 require_once ('../modules/core/src/core/models/renderView.php');
 
 
-$filename= $config['filename'];
-
-if ($request['action']=='index')
-    $request['action']='select';
-
-
-switch($request['action'])
+class Users
 {
-    case 'insert':        
+    
+    public $layout = 'dashboard';
+    
+    public function index()
+    {
+       header('Location: /users/select'); 
+    }
+    
+    public function select()
+    {
+        // $usuarios = getUsers($filename);
+        $usuarios=getUsersDB('users', $config);
+        $content = renderView($request, $config,
+            array('usuarios'=>$usuarios));
+        
+        return $content;
+    }
+    
+    public function insert()
+    {
         if($_POST)
-        {            
+        {
             $filterdata = filterForm($userForm, $_POST);
             $validationdata = validationForm($userForm, $filterdata);
             if($validationdata===TRUE)
@@ -36,15 +51,18 @@ switch($request['action'])
                 //insertUser($filterdata, $filename);
                 insertUserDB($filterdata, 'users', $config);
             }
-            header('Location: /users');            
-        }        
+            header('Location: /users');
+        }
         else
-        {           
+        {
             $content = renderView($request, $config);
         }
-    break;
         
-    case 'update':
+        return $content;
+    }
+    
+    public function update()
+    {
         if($_POST)
         {
             $filterdata = filterForm($userForm, $_POST);
@@ -53,23 +71,18 @@ switch($request['action'])
             updateUserDB($filterdata, 'users', $config, $filterdata['iduser']);
             header('Location: /users');
         }
-        else 
+        else
         {
             // $usuario = getUser($request['params']['id'], $filename);
             $usuario = getUserDB('users', $request['params']['id'], $config);
             $content = renderView($request, $config, array('usuario'=>$usuario[0]));
         }
-    break;
-    default:
-    case 'select':
-        // $usuarios = getUsers($filename);
-        $usuarios=getUsersDB('users', $config);
-        $content = renderView($request, $config, 
-                              array('usuarios'=>$usuarios));        
-    break;
+        
+        return $content;
+    }
     
-    case 'delete':
-
+    public function delete()
+    {
         if($_POST)
         {
             if($_POST['submit']=='si')
@@ -78,20 +91,20 @@ switch($request['action'])
                 deleteUserDB('users', $_POST['iduser'], $config);
             }
             // Saltar a select
-            header('Location: /users');           
+            header('Location: /users');
         }
-        else 
+        else
         {
             $content =renderView($request, $config);
         }
         
-    break;
+        return $content;
+    }
 }
 
 
 
 
-include('../modules/application/src/application/layouts/dashboard.phtml');
 
 
 

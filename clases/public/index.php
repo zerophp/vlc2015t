@@ -4,9 +4,11 @@ require_once ('../autoload.php');
 
 
 if(getenv('APPLICATION_ENV')!='development')
-    $config = 'config/application.php';
+    $config = 'configs/application.php';
 else
-    $config = 'config/application.development.php';
+    $config = 'configs/application.development.php';
 
-$fc = core\models\FrontController::getInstance();
+
+
+$fc = core\models\FrontController::getInstance($config);
 $fc->dispatch();

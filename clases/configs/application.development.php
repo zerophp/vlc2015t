@@ -1,5 +1,5 @@
 <?php
-$config=array(  
+return array(  
     'modules'=>array(
                     'core',
                     'application',
