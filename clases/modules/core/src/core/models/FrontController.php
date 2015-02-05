@@ -137,7 +137,12 @@ class FrontController
         $controller = $this->request['controller'];
         $action = $this->request['action'];
         
-        $controller = new $controller($this, $this->config);
+        //$controller = new $controller($this, $this->config);
+        
+        $controller = new $controller();
+        $controller->setRequest($this->request);
+        $controller->setConfig($this->config);
+        
         $this->layout = $controller->layout;
         
         $this->response = $controller->$action();

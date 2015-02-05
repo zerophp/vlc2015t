@@ -4,7 +4,6 @@ namespace application\controllers;
 class Index
 {
     public $layout = 'jumbotron';
-    private $request;
     
 //     public function __construct($dispatch)
 //     {

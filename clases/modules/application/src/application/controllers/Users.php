@@ -20,27 +20,12 @@ namespace application\controllers;
 // require_once ('../modules/core/src/core/models/renderView.php');
 
 
-class Users
-{
-    
+class Users 
+extends \core\controllers\Controller
+implements \core\controllers\ControllerInterface
+{        
     public $layout = 'dashboard';
-    public $request;
-    public $config;
-    
-    public function __construct($dispatch, $config)
-    {
-        $this->request = $dispatch->request;
-        $this->config = $config;
-    }
-    
-//     public function __construct($request, $config)
-//     {
-//         $this->request = $request;
-//         $this->config = $config;
         
-        
-//     }
-    
     public function index()
     {
         die("kaka");
@@ -51,9 +36,9 @@ class Users
     {
        
         require_once ('../modules/application/src/application/models/getUsersDB.php');
-        $usuarios=getUsersDB('users', $this->config);
+        $usuarios=getUsersDB('users', $this->getConfig());
         require_once ('../modules/core/src/core/models/renderView.php');
-        $content = renderView($this->request, $this->config,
+        $content = renderView($this->getRequest(), $this->getConfig(),
             array('usuarios'=>$usuarios));
         
         return $content;
