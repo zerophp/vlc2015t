@@ -54,9 +54,7 @@ class FrontController
     
     public function parseUrl()
     {
-        $actions = array('users'=>array('select','insert','delete', 'update'),
-             
-        );
+        
     
         $request = array();
         // Dividir el string por /
@@ -75,7 +73,7 @@ class FrontController
             // Si longitud superior a 3 y par error 412
             if(count($request) > 3 && (count($request)%2) == 0 )
                 return array('controller'=>'application\\controllers\\error',
-                    'action'=>'412'
+                    'action'=>'error412'
                 );
     
                 // De lo contrario hacer array de params
@@ -101,7 +99,7 @@ class FrontController
                             'action'=> 'index'
                         );
     
-                        if(in_array($request[2], $actions[$request[1]]) && $request[2]!='')
+                        if(method_exists('application\\controllers\\'.$request[1], $request[2]))
                         {
                             $action = $request[2];
                             return array('controller'=>'application\\controllers\\'.$controller,
@@ -119,7 +117,7 @@ class FrontController
                         else
                         {
                             return array('controller'=>'application\\controllers\\error',
-                                'action'=> '404'
+                                'action'=> 'error404'
                             );
                         }
     
@@ -128,7 +126,7 @@ class FrontController
                 else
                 {
                     return array('controller'=>'application\\controllers\\error',
-                        'action'=> '404'
+                        'action'=> 'error404'
                     );
                 }
                  
@@ -139,7 +137,7 @@ class FrontController
         $controller = $this->request['controller'];
         $action = $this->request['action'];
         
-        $controller = new $controller($this);
+        $controller = new $controller($this, $this->config);
         $this->layout = $controller->layout;
         
         $this->response = $controller->$action();

@@ -2,6 +2,8 @@
 
 function renderView($request, $config, $data=null)
 {
+    $request['controller'] = lcfirst(substr($request['controller'], 
+                                strrpos($request['controller'], "\\")+1)); 
     ob_start();
         include ($config['view_path']."/".
                  $request['controller']."/".
