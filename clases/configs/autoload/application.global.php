@@ -1,5 +1,5 @@
 <?php
-$config = array(
+return array(
     'filename'=>'../data/usuarios.txt',
     'view_path'=>'../modules/application/src/application/views',
 

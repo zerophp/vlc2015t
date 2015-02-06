@@ -1,6 +1,8 @@
 <?php
 namespace core\models;
 
+
+
 class FrontController
 {
     private $config;
@@ -22,13 +24,37 @@ class FrontController
     private function __construct($applicationConfig)
     {
         $this->applicationConfig = require_once('../'.$applicationConfig);
-        $this->config = $this->setConfig();
+//         $this->config = $this->setConfig();
+        $this->moduleManager();
         $this->request = $this->parseUrl();       
     }
     
     public function getconfig()
     {
         return $this->config;
+    }
+    
+    public function moduleManager()
+    {
+        $config = array();        
+        $obj = new \stdClass();
+        foreach ($this->applicationConfig['modules'] as $module)
+        {
+            $modulename = $module."\\Module";
+            $mod = new $modulename();
+            $conf = $mod->getConfig();
+            
+            $obj->$module=$conf;
+
+//             echo "<pre>conf";
+//             print_r($obj);
+//             echo "</pre>";
+            
+            
+            
+        }
+        
+        return $config;
     }
     
     public function setconfig()
@@ -40,16 +66,10 @@ class FrontController
             $config_local=array();
             $config_global=array();
             if(file_exists('../configs/autoload/'.$modules.'.local.php'))
-            {
-                require_once('../configs/autoload/'.$modules.'.local.php');
-                $config_local = $config;
-            }
+                $config_local = require_once('../configs/autoload/'.$modules.'.local.php');                
             
             if(file_exists('../configs/autoload/'.$modules.'.global.php'))
-            {
-                include_once('../configs/autoload/'.$modules.'.global.php');
-                $config_global = $config;
-            }
+                $config_global = require_once('../configs/autoload/'.$modules.'.global.php');
             
             $config2 = array_merge($config2, $config_global, $config_local);
         }

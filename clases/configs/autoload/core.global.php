@@ -1,5 +1,4 @@
 <?php
-$config = array(
-    
-    'core'=>'mysql'
+return array(
+    //'core'=>'mysql'
 ); 

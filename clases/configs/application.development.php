@@ -3,7 +3,7 @@ return array(
     'modules'=>array(
                     'core',
                     'application',
-                    'soloparadesarrolladores'
+                    //'soloparadesarrolladores'
                     ),  
     
     
