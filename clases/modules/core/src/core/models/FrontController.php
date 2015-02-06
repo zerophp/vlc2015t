@@ -10,7 +10,7 @@ class FrontController
     static $instance;
     private $applicationConfig;
     
-    public static function getInstance($applicationConfig)
+    public static function getInstance($applicationConfig=null)
     {
         if(!self::$instance)
             self::$instance = new FrontController($applicationConfig);
@@ -22,11 +22,16 @@ class FrontController
     private function __construct($applicationConfig)
     {
         $this->applicationConfig = require_once('../'.$applicationConfig);
-        $this->config = $this->getConfig();
+        $this->config = $this->setConfig();
         $this->request = $this->parseUrl();       
     }
     
     public function getconfig()
+    {
+        return $this->config;
+    }
+    
+    public function setconfig()
     {   
         $config2=array();        
         

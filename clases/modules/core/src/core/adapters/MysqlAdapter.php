@@ -10,7 +10,7 @@ class MysqlAdapter implements \acl\adapters\AdapterInterface
     
     public function __construct($config)
     {
-        $this->config = $config;
+        $this->config = $config['db'];
         $this->connect();
         $this->selectDb();
     }    
@@ -33,12 +33,12 @@ class MysqlAdapter implements \acl\adapters\AdapterInterface
         mysqli_select_db($this->link, $this->config['database']);    
     }
     
-    public function updateQueryDb($query)
+    public function save($query=null)
     {
         return mysqli_query($this->link, $query);    
     }
     
-    public function selectQueryDb($query)
+    public function fetch($query=null)
     {
         $array = array();        
         $result  = mysqli_query($this->link, $query);

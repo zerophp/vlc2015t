@@ -8,5 +8,5 @@ $config = array(
         'password'=>'1234',
         'database'=>'crud'
     ),
-    'adapter'=>'mysql'
+    'adapter'=>'\core\adapters\MysqlAdapter'
 ); 

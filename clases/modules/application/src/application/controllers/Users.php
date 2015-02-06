@@ -20,21 +20,41 @@ namespace application\controllers;
 // require_once ('../modules/core/src/core/models/renderView.php');
 
 
-class Users 
+class Users  
 extends \core\controllers\Controller
 implements \core\controllers\ControllerInterface
 {        
     public $layout = 'dashboard';
         
+    
+    
     public function index()
     {
-        die("kaka");
-       header('Location: /users/select'); 
+        header ("Location: /users/select");
     }
     
     public function select()
+    { 
+        $kaka = new \application\models\Kaka();
+        $usuarios = $kaka->getUsers();
+
+        foreach ($usuarios as $values)
+            $usuarios[] = implode("|", $values);
+        
+//         echo "<pre>usuarios: ";
+//         print_r($usuarios);
+//         echo "</pre>";
+//         die;
+        require_once ('../modules/core/src/core/models/renderView.php');
+        $content = renderView($this->getRequest(), $this->getConfig(),
+            array('usuarios'=>$usuarios));
+    
+        return $content;
+    }
+    
+    public function select2()
     {
-       
+
         require_once ('../modules/application/src/application/models/getUsersDB.php');
         $usuarios=getUsersDB('users', $this->getConfig());
         require_once ('../modules/core/src/core/models/renderView.php');

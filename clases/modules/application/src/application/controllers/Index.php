@@ -1,7 +1,9 @@
 <?php
 namespace application\controllers;
 
-class Index
+class Index 
+extends \core\controllers\Controller
+implements \core\controllers\ControllerInterface
 {
     public $layout = 'jumbotron';
     

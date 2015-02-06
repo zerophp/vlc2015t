@@ -5,7 +5,12 @@ abstract class Controller
 {
     private $request;
     private $config;
+    private $method;
     
+    public function __construct()
+    {
+        $this->method = $_SERVER['REQUEST_METHOD'];
+    }
     /**
      * @param field_type $request
      */
@@ -37,6 +42,15 @@ abstract class Controller
     {
         return $this->config;
     }
+    
+//     abstract private function get()
+//     {
+//         // Lllamar con get a //resource;
+//     }
+//     abstract private function post();
+//     abstract private function put();
+//     abstract private function delete();
+//     abstract private function options();
 
     
     
