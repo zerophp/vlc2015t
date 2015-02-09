@@ -8,5 +8,5 @@ return array(
         'password'=>'1234',
         'database'=>'crud'
     ),
-    'adapter'=>'mysql'
+    'adapter'=>'Mysql'
 ); 

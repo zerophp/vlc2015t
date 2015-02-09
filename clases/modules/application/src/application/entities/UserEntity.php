@@ -12,9 +12,20 @@ class UserEntity implements UsersEntityInterface
     public $genders_idgender;    
     public $cities_idcity;
     
-    //TODO
-    // public function extract($obj);
-    // public function hydrate($arr);
+    
+    public function extract($obj)
+    {
+        
+    }
+    
+    public function hydrate($arr)
+    {
+        foreach ($arr as $key => $value)
+        {
+            $this->$key = $value;
+        }
+        return $this;
+    }
     
     
     

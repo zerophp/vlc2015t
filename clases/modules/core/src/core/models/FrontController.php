@@ -25,7 +25,7 @@ class FrontController
     {
         $this->applicationConfig = require_once('../'.$applicationConfig);
 //         $this->config = $this->setConfig();
-        $this->moduleManager();
+        $this->config = $this->moduleManager();
         $this->request = $this->parseUrl();       
     }
     
@@ -45,16 +45,9 @@ class FrontController
             $conf = $mod->getConfig();
             
             $obj->$module=$conf;
-
-//             echo "<pre>conf";
-//             print_r($obj);
-//             echo "</pre>";
-            
-            
-            
         }
         
-        return $config;
+        return $obj;
     }
     
     public function setconfig()

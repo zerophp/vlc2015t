@@ -2,6 +2,8 @@
 namespace application\controllers;
 
 
+use application\services\UsersService;
+use core\models\Mvc;
 // require_once ('../modules/application/src/application/forms/userForm.php');
 // require_once ('../modules/core/src/core/forms/filterForm.php');
 // require_once ('../modules/core/src/core/forms/validationForm.php');
@@ -26,6 +28,11 @@ implements \core\controllers\ControllerInterface
 {        
     public $layout = 'dashboard';
         
+    public function __construct()
+    {
+        if(!$_SESSION['application']['login'])
+            header("Location: /author/index");
+    }
     
     
     public function index()
@@ -35,18 +42,11 @@ implements \core\controllers\ControllerInterface
     
     public function select()
     { 
-        $kaka = new \application\models\Kaka();
-        $usuarios = $kaka->getUsers();
-
-        foreach ($usuarios as $values)
-            $usuarios[] = implode("|", $values);
         
-//         echo "<pre>usuarios: ";
-//         print_r($usuarios);
-//         echo "</pre>";
-//         die;
-        require_once ('../modules/core/src/core/models/renderView.php');
-        $content = renderView($this->getRequest(), $this->getConfig(),
+        $usersService = new UsersService();
+        $usuarios = $usersService->getUsers();
+
+        $content = Mvc::renderView($this->getRequest(), $this->getConfig(),
             array('usuarios'=>$usuarios));
     
         return $content;

@@ -1,16 +1,16 @@
 <?php
 namespace core\adapters;
 
-use \acl\adapters\AdapterInterface;
 
-class MysqlAdapter implements \acl\adapters\AdapterInterface
+
+class MysqlAdapter 
 {
     private $config;
     private $link;
     
     public function __construct($config)
     {
-        $this->config = $config['db'];
+        $this->config = $config->db;
         $this->connect();
         $this->selectDb();
     }    

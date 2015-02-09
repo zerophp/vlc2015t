@@ -22,7 +22,7 @@ class Mvc
         $request['controller'] = lcfirst(substr($request['controller'],
             strrpos($request['controller'], "\\")+1));
         ob_start();
-        include ($config['view_path']."/".
+        include ($config->application->view_path."/".
             $request['controller']."/".
             $request['action'].".phtml");
     

@@ -8,11 +8,14 @@ class Module
     public function __construct()
     {
         $this->setConfig();
+        $this->getBootstrap();
+        
     }
 
 
     public function getBootstrap()
     {
+        session_start();
         //$config = $this->getConfig();
     }
 
