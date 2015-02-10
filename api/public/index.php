@@ -14,11 +14,6 @@ $fc = core\models\FrontController::getInstance($config);
 $fc->dispatch();
 
 
-echo session_id();
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
 // $config = array('db' => array('host'=>'localhost',
 //                     'user'=>'root',
 //                     'password'=>'1234',

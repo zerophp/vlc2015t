@@ -53,6 +53,23 @@ class UsersMapper
         
     }
    
+    public function getUser($id)
+    {
+        $gatewayname = '\\application\gateways\Users'.$this->adapter;
+        $gateway = new $gatewayname($this->config->application);
+        $user = $gateway->getUser($id);
+         
+       
+            $entity = new UserEntity();
+            $entity->hydrate($user);
+            
+
+    
+
+    
+        return $entity;
+    
+    }
     
     public function getUsers()
     {

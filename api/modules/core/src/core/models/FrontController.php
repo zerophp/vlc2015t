@@ -112,6 +112,25 @@ class FrontController
                     // Ok
                     // Return request
                     $controller = $request[1];
+                    
+                    $header = getallheaders();
+                    if(isset($request[2]))
+                    {
+                        
+                    
+                        if($header['Accept']=='application/json')
+                        {
+                            return array('controller'=>'application\\controllers\\'.$controller,
+                                'action'=> 'index',
+                                'params'=>$request[2]
+                            );
+                        }
+                    }
+                    else
+                        return array('controller'=>'application\\controllers\\'.$controller,
+                            'action'=> 'index'
+                        );
+                    
                     if(!isset($request[2]))
                         return array('controller'=>'application\\controllers\\'.$controller,
                             'action'=> 'index'
@@ -172,6 +191,8 @@ class FrontController
     
     public function renderLayout()
     {
+        if(!$this->layout)
+            return;
         $content = $this->response;
         include('../modules/application/src/application/layouts/'.$this->layout.'.phtml');
         return ;

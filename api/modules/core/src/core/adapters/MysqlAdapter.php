@@ -42,6 +42,7 @@ class MysqlAdapter
     {
         $array = array();        
         $result  = mysqli_query($this->link, $query);
+        if($result)
         while ($row = mysqli_fetch_assoc($result))
         {
             $array[]=$row;

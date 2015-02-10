@@ -13,6 +13,14 @@ class UsersService
         return $mapper -> getUsers();
     }
     
+    public function getUser($id)
+    {
+        $mapper = new mapper\UsersMapper();
+        
+        /* Muchas cosas mas*/
+        return $mapper -> getUser($id);
+    }
+    
     public function insertUser($data)
     {
         

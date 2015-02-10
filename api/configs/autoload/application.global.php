@@ -6,7 +6,7 @@ return array(
     'db' => array('host'=>'localhost',
         'user'=>'root',
         'password'=>'1234',
-        'database'=>'crud'
+        'database'=>'crudk'
     ),
     'adapter'=>'\core\adapters\MysqlAdapter'
 ); 

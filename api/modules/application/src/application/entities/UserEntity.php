@@ -20,6 +20,7 @@ class UserEntity implements UsersEntityInterface
     
     public function hydrate($arr)
     {
+        if(isset($arr))
         foreach ($arr as $key => $value)
         {
             $this->$key = $value;

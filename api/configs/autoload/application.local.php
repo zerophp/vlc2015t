@@ -4,9 +4,9 @@ return array(
     'view_path'=>'../modules/application/src/application/views',
 
     'db' => array('host'=>'localhost',
-        'user'=>'php',
+        'user'=>'root',
         'password'=>'1234',
-        'database'=>'crud'
+        'database'=>'crudk'
     ),
     'adapter'=>'Mysql'
 ); 

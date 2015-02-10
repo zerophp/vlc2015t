@@ -31,7 +31,11 @@ class UsersMysql extends MysqlAdapter
     
     public function getUser($id)
     {
+        $sql = "SELECT * FROM users WHERE iduser='".$id."'";
+        $users = $this->fetch($sql);
         
+        if(isset($users[0]['iduser']))
+            return $users[0];
     }
 }
 /*
