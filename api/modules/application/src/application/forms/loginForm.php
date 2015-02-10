@@ -1,0 +1,27 @@
+<?php
+$loginForm=array(    
+    'email'=>array(
+        'label'=>'Email',
+        'type'=>'email',
+        'filters'=>array('striptags','striptrim'),
+        'validation'=>array('required'=>TRUE,
+                            'email'=>TRUE,
+                            'maxsize'=>200,
+                            'minsize'=>3
+                            )
+    ),
+    'password'=>array(
+        'label'=>'Password',
+        'type'=>'password',
+        'filters'=>array('striptags','striptrim'),
+        'validation'=>array('required'=>TRUE,
+                            'maxsize'=>12,
+                            'minsize'=>3
+        )
+    ),    
+    'submit'=>array(
+        'label'=>null,
+        'type'=>'submit',
+        'value'=>'Enviar'
+    ),    
+);
